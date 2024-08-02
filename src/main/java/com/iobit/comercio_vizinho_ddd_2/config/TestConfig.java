@@ -3,6 +3,7 @@ package com.iobit.comercio_vizinho_ddd_2.config;
 
 import com.iobit.comercio_vizinho_ddd_2.entities.Order;
 import com.iobit.comercio_vizinho_ddd_2.entities.User;
+import com.iobit.comercio_vizinho_ddd_2.entities.enums.OrderStatus;
 import com.iobit.comercio_vizinho_ddd_2.repositories.OrderRepository;
 import com.iobit.comercio_vizinho_ddd_2.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class TestConfig implements CommandLineRunner {
         User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
 
-        Order o1 = new Order(null, Instant.parse("2024-06-20T19:53:07z"), u1);
-        Order o2 = new Order(null, Instant.parse("2024-07-20T03:42:10z"), u2);
-        Order o3 = new Order(null, Instant.parse("2024-07-20T15:21:22z"), u1);
+        Order o1 = new Order(null, Instant.parse("2024-06-20T19:53:07z"), OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.parse("2024-07-20T03:42:10z"), OrderStatus.DELIVERED, u2);
+        Order o3 = new Order(null, Instant.parse("2024-07-20T15:21:22z"), OrderStatus.CANCELED, u1);
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
