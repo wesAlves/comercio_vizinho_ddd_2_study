@@ -1,5 +1,6 @@
 package com.iobit.comercio_vizinho_ddd_2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iobit.comercio_vizinho_ddd_2.entities.pk.OrderItemPK;
 import jakarta.persistence.*;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -25,6 +26,7 @@ public class OrderItem implements Serializable {
         id.setProduct(product);
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }

@@ -1,15 +1,9 @@
 package com.iobit.comercio_vizinho_ddd_2.config;
 
 
-import com.iobit.comercio_vizinho_ddd_2.entities.Category;
-import com.iobit.comercio_vizinho_ddd_2.entities.Order;
-import com.iobit.comercio_vizinho_ddd_2.entities.Product;
-import com.iobit.comercio_vizinho_ddd_2.entities.User;
+import com.iobit.comercio_vizinho_ddd_2.entities.*;
 import com.iobit.comercio_vizinho_ddd_2.entities.enums.OrderStatus;
-import com.iobit.comercio_vizinho_ddd_2.repositories.CategoryRepository;
-import com.iobit.comercio_vizinho_ddd_2.repositories.OrderRepository;
-import com.iobit.comercio_vizinho_ddd_2.repositories.ProductRepository;
-import com.iobit.comercio_vizinho_ddd_2.repositories.UserRepository;
+import com.iobit.comercio_vizinho_ddd_2.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -62,14 +59,27 @@ public class TestConfig implements CommandLineRunner {
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
-        p1.getCategories().add(cat2);
-        p2.getCategories().add(cat1);
-        p2.getCategories().add(cat3);
-        p3.getCategories().add(cat3);
-        p4.getCategories().add(cat3);
-        p5.getCategories().add(cat2);
+        p1.getCategories()
+          .add(cat2);
+        p2.getCategories()
+          .add(cat1);
+        p2.getCategories()
+          .add(cat3);
+        p3.getCategories()
+          .add(cat3);
+        p4.getCategories()
+          .add(cat3);
+        p5.getCategories()
+          .add(cat2);
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
     }
 }
