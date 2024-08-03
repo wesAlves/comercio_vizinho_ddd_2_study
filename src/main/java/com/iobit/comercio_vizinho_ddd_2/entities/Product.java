@@ -20,7 +20,7 @@ public class Product {
     @ManyToMany
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns =
     @JoinColumn(name = "category_id"))
-    private Set<Category> cagegories = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
 
 
     public Product() {
@@ -74,8 +74,8 @@ public class Product {
         this.imagUrl = imagUrl;
     }
 
-    public Set<Category> getCagegories() {
-        return cagegories;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
