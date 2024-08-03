@@ -3,9 +3,7 @@ package com.iobit.comercio_vizinho_ddd_2.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "category")
@@ -16,8 +14,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-//    @ManyToMany(Product)
-//    private List<Product> products = new ArrayList<>();
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -43,13 +41,9 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-//    public List<Product> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
+    public Set<Product> getProducts() {
+        return products;
+    }
 
     @Override
     public boolean equals(Object o) {
